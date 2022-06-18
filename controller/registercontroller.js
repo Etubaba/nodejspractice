@@ -28,7 +28,7 @@ const newUser = async (req, res) => {
         const hashedpassword = await bcrypt.hash(password, 10)
 
 
-        //create and store the new user all at ones 
+        //create and store the new user all at once
 
         const newPerson = await User.create({
             username: username,
@@ -42,7 +42,7 @@ const newUser = async (req, res) => {
 
 
     } catch (err) {
-        console.log(err)
+        console.log(err.message)
     }
 
 

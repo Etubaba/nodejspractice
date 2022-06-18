@@ -21,6 +21,37 @@ const getSingleProduct = async (req, res) => {
 
 }
 
+//get Product by userId
+
+const getProductByUserId =async (req,res)=>{
+    const userId = req.params.id
+    if (!userId) res.sendStatus(400).json({ 'msg': 'userId is required' })
+
+    const product = await Product.find({userId:userId})
+    if (!product) res.sendStatus(400).json({ 'msg': 'No product match the userId' })
+    res.json({ "status": true, "data": product })
+
+}
+
+
+
+
+
+
+//get Product by categoryID
+const getProductByCategoryId = async (req, res) => {
+    const catId = req.params.id
+    if (!catId) res.sendStatus(400).json({ 'msg': 'category Id is required' })
+    const product = await Product.find({catId:catId})
+    if (!product) res.sendStatus(400).json({ 'msg': 'No product match the category Id' })
+    res.json({ "status": true, "data": product })
+
+}
+
+
+
+
+
 //delete product 
 
 const deleteProduct = async (req, res) => {
@@ -39,19 +70,21 @@ const deleteProduct = async (req, res) => {
 
 //create new product
 const createProduct = async (req, res) => {
-    if (!req?.body?.title || !req?.body?.description || !req?.body?.userId || !req?.body?.catId || !req?.body?.price || !req?.body?.countryCode || !req?.body?.image) {
+    const {title, description,userId,catId,price,countryCode} = req.body
+    const fileArr=req?.files.map(file=>file.path)
+    if (!title || !description || !userId || !catId || !price || !countryCode) {
         return res.status(400).json({ 'msg': 'All field are required' })
     }
     try {
 
         const newProduct = await Product.create({
-            title: req.body.title,
-            description: req.body.description,
-            userId: req.body.userId,
-            catId: req.body.catId,
-            price: req.body.price,
-            countryCode: req.body.countryCode,
-            image: req.body.image,
+            title: title,
+            description: description,
+            userId:userId,
+            catId: catId,
+            price: price,
+            countryCode:countryCode,
+            image: fileArr
         })
 
         res.json({ 'status': true, data: newProduct })
@@ -83,4 +116,6 @@ const updateProduct = async (req, res) => {
 
 }
 
-module.exports = { getAllProducts, getSingleProduct, deleteProduct, createProduct, updateProduct }
+module.exports = { getAllProducts, getSingleProduct,
+     deleteProduct, createProduct, updateProduct,
+     getProductByUserId,getProductByCategoryId }

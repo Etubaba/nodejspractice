@@ -1,5 +1,13 @@
 const Category = require('../model/Category');
-const Product = require('../model/Product');
+
+
+
+
+
+
+
+
+
 
 //get All Categories
 
@@ -28,42 +36,42 @@ const deleteCategory = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //post new category 
 const createCategory = async (req, res) => {
-    const { name, image } = req.body
-    if (!name || !image) res.sendStatus(400).json({ 'msg': 'All fields required' })
 
-    try {
-        const newCategory = await Category.create({
+    const { name } = req.body
+    if (!name || !req.file.filename ) res.sendStatus(400).json({ 'msg': 'All fields required' })
+    console.log('image', req.file)
+
+try{
+ const newCategory = await Category.create({
             name: name,
-            image: image
+            image: req.file.path
         })
-        console.log(newCategory)
+
         res.json({ 'status': true, 'data': newCategory })
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ status: false, message: 'Operation failed' });
-    }
+
+}catch(e){console.error(e.message)}
+        // const newCategory = new Category({
+        //     name: name,
+        //     image: {
+        //         data:req.file.filename,
+        //         contentType:'image/png'
+        //     }
+        // })
+        // const created = await newCategory.save()
+        // .then(()=>res.status(201).json({status:true, data:created}))
+        // .catch(err=>console.log(err.message))
+
+
+
+
+
+        
+  //  }
+  // })
+        
+ 
 }
 
 

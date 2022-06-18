@@ -7,6 +7,7 @@ const connectDB = require('./config/dbConfig')
 
 const app = express()
 
+
 //connect to mongoDB
 connectDB();
 
@@ -29,6 +30,7 @@ app.use('/', require('./routes/products'))
 app.use('/', require('./routes/category'))
 app.use('/', require('./routes/handleregister'))
 app.use('/', require('./routes/handlelogin'))
+app.use('/', require('./routes/users'))
 
 
 
