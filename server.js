@@ -12,7 +12,7 @@ const app = express()
 connectDB();
 
 
-
+//type:module =>for new import statements
 //middleware to serve static files
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -31,6 +31,7 @@ app.use('/', require('./routes/category'))
 app.use('/', require('./routes/handleregister'))
 app.use('/', require('./routes/handlelogin'))
 app.use('/', require('./routes/users'))
+app.use('/', require('./routes/countryFetch'))
 
 
 
