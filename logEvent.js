@@ -4,12 +4,12 @@ const path = require('path')
 const { format } = require('date-fns')
 const fsPromises = require('fs').promises
 
-const { v4: uuid } = require('uuid')
+// const { v4: uuid } = require('uuid')
 
 const logEvent = async (message) => {
 
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
-    const logItem = `${dateTime}\t${uuid()}\t${message}\n`
+    const logItem = `${dateTime}\t${'mbvb'}\t${message}\n`
     try {
         if (!fs.existsSync(path.join(__dirname, 'logs'))) {
             await fsPromises.mkdir(path.join(__dirname, 'logs'))
