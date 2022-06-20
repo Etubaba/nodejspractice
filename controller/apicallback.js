@@ -4,7 +4,7 @@ const Friend = require('../model/Friend')
 
 
 
-//get all friends list (get all data)
+//get all friends list (get all data
 const getAllData = async (req, res) => {
     const friendList = await Friend.find()
     if (!friendList) res.status(204).json({ msg: 'no data' })
