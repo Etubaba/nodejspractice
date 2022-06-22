@@ -79,7 +79,7 @@ try{
 
 const updateCategory = async (req, res) => {
     const id = req.params.id;
-    if (!id) res.sendStatus(400).json({ 'msg': 'id parameter required' })
+    if (!id) res.status(400).json({ 'msg': 'id parameter required' })
 
     const matchedCategory = await Category.findOne({ _id: id }).exec();
 
