@@ -25,7 +25,7 @@ app.use(express.json())
 
 
 
-app.use('/', require('./routes/apimethods'))
+//app.use('/', require('./routes/apimethods'))
 app.use('/', require('./routes/products'))
 app.use('/', require('./routes/category'))
 app.use('/', require('./routes/handleregister'))
